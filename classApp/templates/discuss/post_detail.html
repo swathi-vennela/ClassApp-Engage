@@ -6,12 +6,12 @@
 <div class="container my-4">
 <div class="jumbotron">
     <h1 class="display-4">Classroom Discuss</h1>
-    <p class="lead">Welcome to our discussion forum. You can post your question or any related queries by simply clicking on the add post button. <br> Thankyou and Have a nice day!!</p>
+    <!--<p class="lead">Welcome to our discussion forum. You can post your question or any related queries by simply clicking on the add post button. <br> Thankyou and Have a nice day!!</p>
     <hr class="my-4">
     <p>You can also reply to others post by clicking on their post and replying them.</p>
-      <a class="btn btn-primary btn-lg" data-toggle="modal" href="{% url 'discuss:add-post' %}">Add post!</a>
+      <a class="btn btn-primary btn-lg" data-toggle="modal" href="{% url 'discuss:add-post' %}">Add post!</a>-->
     </div>
-    {% for post in posts %}
+
     <div class="container-fluid mt-10">
       <div class="row">
           <div class="col-md-12">
@@ -29,17 +29,28 @@
                   <div class="card-body">
                       <p>{{post.post_content}}</p>
                   </div>
-                  <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-1 pb-3"> 
-                    <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{post.get_absolute_url}}">View</a>                 
-                  </div>
+                  <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-3 pt-0 pb-3">
+
+                    <a class="btn btn-primary btn-lg" data-toggle="modal" href="#">Reply</a>
+                </div>
               </div>
           </div>
       </div>
   </div>
-  {% endfor %}
 
 </div>
-
+{% for reply in replies %}
+<br>
+<div class="container">
+<div class="media">
+    <img class="mr-3 rounded-circle" src="/media/{{reply.image}}" alt="." width="30px" height="30px">
+    <div class="media-body">
+      <h4 class="mt-0">{{reply.user}}	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;  <span><small style="font-size: 13px;">({{reply.timestamp}})</small></span></h4>   
+      <h5>{{reply.reply_content}}</h5>
+    </div>
+  </div>
+</div>
+{% endfor %}
 <!-- Modal 
 <div class="modal fade" id="questions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

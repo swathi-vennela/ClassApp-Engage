@@ -1,13 +1,20 @@
 from django.db import models
 from users.models import User
 from django.utils.timezone import now
+from django.urls import reverse
 
 class Post(models.Model):
     user1 = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     post_id = models.AutoField
+    #slug = models.SlugField(unique=True)
     post_content = models.TextField()
     timestamp= models.DateTimeField(default=now)
     image = models.ImageField(upload_to="images",default="")
+
+    def get_absolute_url(self):
+        return reverse("discuss:post-detail", kwargs={
+            'post_id' : self.post_id
+        })
     
 class Replie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)

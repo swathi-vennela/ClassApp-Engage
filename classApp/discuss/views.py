@@ -23,15 +23,32 @@ def create_post(request):
 def forum_home(request):
     return render(request, 'discuss/forum.html', context={'posts' : Post.objects.all()})
 
-# def create_post(request):
-#     profile = Student.objects.all()
-#     if request.method=="POST":   
-#         user = request.user
-#         image = request.user.student_profile_pic
-#         content = request.POST['post_content']
-#         post = Post(user1=user, post_content=content, image=image)
-#         post.save()
-#         # alert = True
-#         # return render(request, "forum.html", {'alert':alert})
-#     posts = Post.objects.all()
-#     return render(request, "discuss/forum.html", {'posts':posts})
+def post_detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    #post = Post.objects.get(post_id=post_id)
+    replies = Replie.objects.filter(post = post).order_by("-timestamp")
+    context = {
+        "replies" : replies,
+        "post" : post,
+    }
+    return render(request, 'discuss/post_detail.html', context)
+
+@student_required
+def add_reply(request, post_id):
+    if request.method == "POST":
+        form = ReplyForm(request.POST)
+
+        if form.is_valid():
+            post = get_object_or_404(Post, id=post_id)
+            stud = get_object_or_404(Student, user=request.user)
+            data = form.save(commit=False)
+            data.user = request.user
+            data.post = post 
+            data.image = stud.student_profile_pic
+            data.save()
+            return redirect("discuss:forum-home")
+    else:
+        form = ReplyForm()
+    return render(request, 'discuss/add_post.html', {"form" : form})
+            
+
