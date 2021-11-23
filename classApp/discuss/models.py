@@ -12,8 +12,13 @@ class Post(models.Model):
     image = models.ImageField(upload_to="images",default="")
 
     def get_absolute_url(self):
+        #id_str = ""+self.post_id
         return reverse("discuss:post-detail", kwargs={
-            'post_id' : self.post_id
+            'post_id' : self.id
+        })
+    def get_reply_item_url(self):
+        return reverse("discuss:add-reply", kwargs={
+            'post_id' : self.id 
         })
     
 class Replie(models.Model):

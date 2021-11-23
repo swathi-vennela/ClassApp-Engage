@@ -49,6 +49,6 @@ def add_reply(request, post_id):
             return redirect("discuss:forum-home")
     else:
         form = ReplyForm()
-    return render(request, 'discuss/add_post.html', {"form" : form})
+    return render(request, 'discuss/add_reply.html', {"form" : form})
             
 
