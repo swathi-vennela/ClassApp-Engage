@@ -1,0 +1,86 @@
+{% extends 'discuss/basic.html' %}
+{% load crispy_forms_tags %}
+<!--{% block title %} Forum {% endblock %}
+{% block homeactive %} active {% endblock homeactive %}-->
+{% block content %}
+<div class="container my-4">
+<div class="jumbotron">
+    <h1 class="display-4">Quizzes</h1>
+    <!--<p class="lead">Welcome to our discussion forum. You can post your question or any related queries by simply clicking on the add post button. <br> Thankyou and Have a nice day!!</p>
+    <hr class="my-4">
+    <p>You can also reply to others post by clicking on their post and replying them.</p>
+      <a class="btn btn-primary btn-lg" data-toggle="modal" href="{% url 'discuss:add-post' %}">Add post!</a>-->
+    </div>
+
+    <div class="container-fluid mt-10">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card mb-4">
+                  <div class="card-header">
+                      <div class="media flex-wrap w-100 align-items-center">
+                          <h1>{{quiz.name}}</h1> 
+                          <div class="media-body ml-3"> <a href="#" data-abc="true">{{quiz.author}}</a>
+                          </div>
+                          <!-- <div class="text-muted small ml-3">
+                            <div class="px-4 pt-3">{{quiz.timestamp}} </div>
+                          </div> -->
+                      </div>
+                  </div>         
+                  <div class="card-body">
+                      <p>{{quiz.desc}}</p>
+                  </div>
+                  <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-3 pt-0 pb-3">
+
+                    <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{quiz.get_add_ques_url}}">Add Question</a>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
+{% for question in quiz.questions.all %}
+<br>
+<div class="container">
+<div class="media">
+    <div class="media-body">
+        <h5>{{question.desc}}</h5>
+        <ol>
+            <li>{{question.choice1}}</li>
+            <li>{{question.choice2}}</li>
+            <li>{{question.choice3}}</li>
+            <li>{{question.choice4}}</li>
+        </ol>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<!-- Modal 
+<div class="modal fade" id="questions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="modal-body">
+          <form action="/" method="POST"> {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Add a new post!</label>
+            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+          </div>
+        </div>
+        {% else %}
+        <h3>Please Login to post</h3>
+        {% endif %}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  {% endblock content %}
