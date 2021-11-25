@@ -63,9 +63,9 @@ def attempt_quiz(request, quiz_id):
         correct=0
         for q in questions:
             total += 1
-            print(request.POST.get(q.ques_id))
+            print(request.POST.get(q.desc))
             print(q.ans)
-            if q.ans == request.POST.get(q.ques_id):
+            if q.ans == request.POST.get(q.desc):
                 score += 10
                 correct += 1
             else:
