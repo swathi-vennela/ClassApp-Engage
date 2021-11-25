@@ -30,5 +30,25 @@ class Quiz(models.Model):
         return reverse("quiz:add-question", kwargs={
             'quiz_id' : self.id 
         })
+    def get_attempt_url(self):
+        return reverse("quiz:attempt-quiz", kwargs={
+            'quiz_id' : self.id 
+        })
+
+class Response(models.Model):
+    response_id = models.AutoField
+    choice_picked = models.CharField(max_length=1)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+class ResponseSheet(models.Model):
+    resp_id = models.AutoField
+    student = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    responses = models.ManyToManyField(Response)
+    score = models.IntegerField(default=0)
+    correct = models.IntegerField(default=0)
+    wrong = models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.quiz.name} of {self.id}"
 
 

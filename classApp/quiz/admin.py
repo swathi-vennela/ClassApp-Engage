@@ -3,3 +3,5 @@ from .models import *
 
 admin.site.register(Quiz)
 admin.site.register(Question)
+admin.site.register(Response)
+admin.site.register(ResponseSheet)

@@ -1,12 +1,30 @@
 {% extends 'quiz/dependencies.html' %}
  
 {% block content %}
- 
+{% for response in responses.all %}
+<br>
+<div class="container">
+<div class="media">
+    <div class="media-body">
+        <h5>{{response.question.desc}}</h5>
+        <ol>
+            <li>{{response.question.choice1}}</li>
+            <li>{{response.question.choice2}}</li>
+            <li>{{response.question.choice3}}</li>
+            <li>{{response.question.choice4}}</li>
+        </ol>
+        Response recorded: {{response.choice_picked}} <br>
+        Correct answer:  {{response.question.ans}} 
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 <div class="container ">
         
     <div class="card-columns" style="padding: 10px; margin: 20px;">
         <div class="card" align="centre " style="width: 32rem; border:5px black solid">
-            <img class="card-img-top" src="http://kmit.in/emagazine/wp-content/uploads/2018/02/karnataka-results.jpg" alt="Card image cap">
+<!--            <img class="card-img-top" src="http://kmit.in/emagazine/wp-content/uploads/2018/02/karnataka-results.jpg" alt="Card image cap">-->
             <div class="card-body">
                 <h5 class="card-title">Score: {{score}}</h5>
  

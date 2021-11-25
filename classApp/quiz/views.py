@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+#from django.core.checks import messages
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from users.models import *
 from .models import *
@@ -55,28 +57,46 @@ def add_question(request, quiz_id):
 @student_required
 def attempt_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
+    response_qs = ResponseSheet.objects.filter(student=request.user, quiz=quiz)
+    if response_qs.exists():
+        messages.info(request, 'You have already attempted the quiz')
+        return redirect("quiz:quiz-home")
     if request.method == 'POST':
+        # response_qs = ResponseSheet.objects.filter(student=request.user, quiz=quiz)
+        # if response_qs.exists():
+        #     messages.info(request, ' You have already attempted the quiz')
+        #     return redirect("quiz:quiz-home")
+        response_sheet = ResponseSheet.objects.create(student=request.user, quiz=quiz)
         questions = quiz.questions.all()
         score = 0
         total=0
         wrong=0
         correct=0
         for q in questions:
+            response = Response.objects.create(question=q, choice_picked=request.POST.get(q.desc))
+            #response = Response(question=q, choice_picked=request.POST.get(q.desc))
+            response_sheet.responses.add(response)
+            #response_sheet.save()
             total += 1
-            print(request.POST.get(q.desc))
-            print(q.ans)
+            #print(request.POST.get(q.desc))
+            #print(q.ans)
             if q.ans == request.POST.get(q.desc):
                 score += 10
                 correct += 1
             else:
                 wrong += 1
         percent = score/(total*10) * 100
+        response_sheet.score = score
+        response_sheet.correct = correct
+        response_sheet.wrong = wrong
+        response_sheet.save()
         context = {
             'score' : score,
             'correct' : correct,
             'wrong' : wrong,
             'percent' : percent,
             'total' : total,
+            'responses' : response_sheet.responses,
         }
         return render(request, 'quiz/result.html', context)
     else:
@@ -86,5 +106,6 @@ def attempt_quiz(request, quiz_id):
             'questions' : questions,
         }
         return render(request, 'quiz/attempt-quiz.html', context)
+
 
 
