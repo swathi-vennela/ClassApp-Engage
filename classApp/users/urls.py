@@ -11,4 +11,6 @@ urlpatterns = [
     path('teacher_register/',views.teacher_register.as_view(),name='teacher_register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('student-profile/', views.student_profile, name='student-profile'),
+    path('teacher-profile/', views.teacher_profile, name='teacher-profile'),
 ]

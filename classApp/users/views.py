@@ -10,6 +10,7 @@ from datetime import datetime
 from users.decorators import *
 from .forms import *
 from .models import *
+from quiz.models import * 
 
 def index_view(request):
     return render(request, 'users/home.html')
@@ -62,3 +63,25 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+@login_required
+@student_required 
+def student_profile(request):
+    student = Student.objects.get(user = request.user)
+    response_sheets = ResponseSheet.objects.filter(student=request.user)
+    context = {
+        "student" : student,
+        "response_sheets" : list(response_sheets),
+    }
+    return render(request, 'users/student-profile.html', context)
+
+@login_required
+@teacher_required
+def teacher_profile(request):
+    teacher = Teacher.objects.get(user=request.user)
+    quizzes = Quiz.objects.filter(author=request.user)
+    context = {
+        "teacher" : teacher,
+        "quizzes" : list(quizzes),
+    }
+    return render(request, 'users/teacher-profile.html', context)

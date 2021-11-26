@@ -50,5 +50,8 @@ def add_reply(request, post_id):
     else:
         form = ReplyForm()
     return render(request, 'discuss/add_reply.html', {"form" : form})
+
+
+
             
 
