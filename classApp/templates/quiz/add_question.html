@@ -1,28 +1,28 @@
 
-{% extends "users/base.html" %}
+{% extends 'discuss/basic.html' %}
 {% load crispy_forms_tags %}
+<!--{% block title %} Forum {% endblock %}
+{% block homeactive %} active {% endblock homeactive %}-->
 {% block content %}
+<br><br>
+<div id="login-box"; style="padding: 70px 0; text-align: center;">
+    <div class="items">
+      <h1>Add a question</h1>   <br><br>
 
-     <div class = "content-section">
-     	<form method="POST">
-     		{% csrf_token %}
-     		<fieldset class="form-group">
-     			<legend class="border-bottom mb-4">Add a new Question!</legend>
-     			{{ form|crispy }}        <!--Prints out the form that we've passed. as_p will render our form in paragraph tags-->
-     		</fieldset>
-     		<div class="form-group">
-     			<button class="btn btn-outline-info" type="submit">Add</button>
-     		</div>
-     	</form>
-     	<div class="border-top pt-3">
-     		<small class="text-muted">
-     			Cancel? <a class="ml-2" href="{% url 'quiz:quiz-home' %}">Quiz home</a>
-     		</small>
-     	</div>
-     	
-     </div>
-     		
+      <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy }}        <!--Prints out the form that we've passed. as_p will render our form in paragraph tags-->
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Add</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Back to home? <a class="ml-2" href="{% url 'discuss:forum-home' %}">Go back!</a>
+        </small>
+    </div>
 
+</div>   
 {% endblock content %}
-
-

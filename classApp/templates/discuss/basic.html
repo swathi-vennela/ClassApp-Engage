@@ -28,7 +28,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {% block homeactive %} {% endblock homeactive %} ">
-        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'discuss:forum-home' %}">Home <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'quiz:quiz-home' %}">Quiz <span class="sr-only"></span></a>
@@ -45,6 +45,11 @@
         <a class="nav-link" href="{%url 'users:student-profile'%}">Profile</a>
         {% else %}
         <a class="nav-link" href="{%url 'users:teacher-profile' %}">Profile</a>
+        {% endif %}
+      </li>
+      <li class="nav-item">
+        {% if request.user.is_teacher %}
+        <a class="nav-link" href="{%url 'quiz:create-quiz' %}">New Quiz</a>
         {% endif %}
       </li>
         </div>

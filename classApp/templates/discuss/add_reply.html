@@ -1,24 +1,28 @@
+
 {% extends 'discuss/basic.html' %}
 {% load crispy_forms_tags %}
 <!--{% block title %} Forum {% endblock %}
 {% block homeactive %} active {% endblock homeactive %}-->
 {% block content %}
-<div class = "content-section">
-    <form method="POST">
+<br><br>
+<div id="login-box"; style="padding: 70px 0; text-align: center;">
+    <div class="items">
+      <h1>Add a reply</h1>   <br><br>
+
+      <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Sign up as a teacher!</legend>
             {{ form|crispy }}        <!--Prints out the form that we've passed. as_p will render our form in paragraph tags-->
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Add reply</button>
+            <button class="btn btn-outline-info" type="submit">Reply</button>
         </div>
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Back to home? <a class="ml-2" href="{% url 'discuss:forum-home' %}">Go back</a>
+            Back to home? <a class="ml-2" href="{% url 'discuss:forum-home' %}">Go back!</a>
         </small>
     </div>
-    
-</div>
+
+</div>   
 {% endblock content %}

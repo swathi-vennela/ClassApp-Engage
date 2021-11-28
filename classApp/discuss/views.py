@@ -21,7 +21,7 @@ def create_post(request):
     return render(request, 'discuss/add_post.html', {"form":form})
 
 def forum_home(request):
-    return render(request, 'discuss/forum.html', context={'posts' : Post.objects.all()})
+    return render(request, 'discuss/forum.html', context={'posts' : Post.objects.all().order_by("-timestamp")})
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
