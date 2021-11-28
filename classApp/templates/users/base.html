@@ -67,18 +67,15 @@
   <div class="row">
     <div class="col-md-8">
 
-
-      {% if messages %}                                             <!--code to print out the flash messages-->
-            {% for message in messages %}
-                 <div class="alert alert-{{ message.tags }}">
-                      {{ message }}
-                 </div>
-            {% endfor %}
-      {% endif %}
-
-
-
       {% block content %}{% endblock content%}
+      {% if messages %}                                             <!--code to print out the flash messages-->
+      {% for message in messages %}
+          <br><br><br><br>
+           <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+           </div>
+      {% endfor %}
+{% endif %}
     </div>
     <div class="col-md-4">
       <div class="content-section">

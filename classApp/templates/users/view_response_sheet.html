@@ -1,0 +1,34 @@
+{% extends 'discuss/basic.html' %}
+{% load crispy_forms_tags %}
+<!--{% block title %} Forum {% endblock %}
+{% block homeactive %} active {% endblock homeactive %}-->
+{% block content %}
+
+<div class="container my-4">
+    <div class="jumbotron">
+        <h1 class="display-4">Response sheet of {{student}} </h1>
+        <!--<p class="lead">Welcome to our discussion forum. You can post your question or any related queries by simply clicking on the add post button. <br> Thankyou and Have a nice day!!</p>
+        <hr class="my-4">
+        <p>You can also reply to others post by clicking on their post and replying them.</p>
+          <a class="btn btn-primary btn-lg" data-toggle="modal" href="{% url 'discuss:add-post' %}">Add post!</a>-->
+        </div>
+    
+    </div>
+{% for response in responses %}
+<div class="container"; style="padding: 70px 0;">
+<div class="media">
+    <div class="media-body">
+        <h5>{{response.question.desc}}</h5>
+        <ol>
+            <li>{{response.question.choice1}}</li>
+            <li>{{response.question.choice2}}</li>
+            <li>{{response.question.choice3}}</li>
+            <li>{{response.question.choice4}}</li>
+        </ol>
+        Response recorded: {{response.choice_picked}} <br>
+        Correct answer:  {{response.question.ans}} 
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

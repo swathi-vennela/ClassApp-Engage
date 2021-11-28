@@ -107,5 +107,7 @@ def attempt_quiz(request, quiz_id):
         }
         return render(request, 'quiz/attempt-quiz.html', context)
 
+        
+
 
 

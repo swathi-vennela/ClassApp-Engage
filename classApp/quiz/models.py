@@ -34,6 +34,10 @@ class Quiz(models.Model):
         return reverse("quiz:attempt-quiz", kwargs={
             'quiz_id' : self.id 
         })
+    def get_responses_url(self):
+        return reverse("users:quiz_responses", kwargs={
+            'quiz_id' : self.id 
+        })
 
 class Response(models.Model):
     response_id = models.AutoField
@@ -50,5 +54,9 @@ class ResponseSheet(models.Model):
     wrong = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.quiz.name} of {self.id}"
+    def get_response_sheet_url(self):
+        return reverse("users:view_response_sheet", kwargs={
+            'resp_id' : self.id 
+        })
 
 

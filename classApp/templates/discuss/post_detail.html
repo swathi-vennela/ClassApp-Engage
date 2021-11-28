@@ -29,9 +29,13 @@
                   <div class="card-body">
                       <p>{{post.post_content}}</p>
                   </div>
+                  
                   <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-3 pt-0 pb-3">
-
+                    {% if user.is_authenticated %}
+                    {% if request.user.is_student %}
                     <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{post.get_reply_item_url}}">Reply</a>
+                    {% endif %}
+                    {% endif %}
                 </div>
               </div>
           </div>

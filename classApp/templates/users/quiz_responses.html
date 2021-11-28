@@ -5,46 +5,34 @@
 {% block content %}
 <div class="container my-4">
 <div class="jumbotron">
-    <h1 class="display-4">Hi {{request.user}}</h1>
+    <h1 class="display-4">{{quiz.name}} Results</h1>
     <!--<p class="lead">Welcome to our discussion forum. You can post your question or any related queries by simply clicking on the add post button. <br> Thankyou and Have a nice day!!</p>
     <hr class="my-4">
     <p>You can also reply to others post by clicking on their post and replying them.</p>
       <a class="btn btn-primary btn-lg" data-toggle="modal" href="{% url 'discuss:add-post' %}">Add post!</a>-->
     </div>
 
-    <div class="container-fluid mt-10">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card mb-4">
-                  <div class="card-header">
-                      <div class="media flex-wrap w-100 align-items-center"> 
-                          email : {{teacher.email}} <br>
-                          designation : {{teacher.designation}} <br>
-
-                </div>
-              </div>
-          </div>
-      </div>
-  </div>
-
 </div>
-<h2>Quizzes Hosted</h2>
+
 <!-- cards -->
 <div class="container">
     <div class="container mx-auto mt-2">
       <div class="row">
   
-        {% for quiz in quizzes %}
+        {% for response in responses %}
         <div class="col-md-4">
           <div class="card" style="width: 21rem;">
-            <div class="card-body">
-              <h5 class="card-title" style="text-align: center;">{{quiz.name}}</h5>
+            <div class="card-body" >
+              <h5 class="card-title" style="text-align: center;">{{response.student}}</h5>
               <br>
-              <p class="card-text">{{quiz.desc}}</p>
-  
+              <p class="card-text">Total score = {{response.score}}</p>
+              <p class="card-text">Correct answers = {{response.correct}}</p>
+              <p class="card-text">Wrong answers = {{response.wrong}}</p>
               <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-1 pb-3">
-                <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{quiz.get_responses_url}}">View Responses</a>                 
+                <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{response.get_response_sheet_url}}">Response Sheet</a>                 
               </div>
+              
+              <br>
               <!-- <button data-bs-target="#exampleModal" data-bs-toggle="modal" data-time="{{i.time}}"
                 data-questions="{{i.number_of_questions}}" data-name="{{i.name}}" data-id="{{i.id}}" id="btn"
                 style="justify-content: center;" class="attempt btn mr-2 modal-button"><i class="fas fa-link"></i>Attempt

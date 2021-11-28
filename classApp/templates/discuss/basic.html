@@ -1,8 +1,15 @@
 {% load static %}
 
 <!doctype html>
+
 <html lang="en">
   <head>
+    <style>
+      html *
+      {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+      }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,7 +20,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="{% url 'discuss:forum-home' %}">Discussion Forum</a>
+  <a class="navbar-brand" href="{% url 'discuss:forum-home' %}">Classroom</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,6 +30,9 @@
       <li class="nav-item {% block homeactive %} {% endblock homeactive %} ">
         <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'quiz:quiz-home' %}">Quiz <span class="sr-only"></span></a>
+      </li>
       {% if user.is_authenticated %}
 <ul class="navbar-nav mr-2">
 <li class="nav-item dropdown">
@@ -31,15 +41,23 @@
           <a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a>
           
       <li class="nav-item {% block profileactive %} {% endblock profileactive %}">
-        <a class="nav-link" href="#">Profile</a>
+        {% if request.user.is_student %}
+        <a class="nav-link" href="{%url 'users:student-profile'%}">Profile</a>
+        {% else %}
+        <a class="nav-link" href="{%url 'users:teacher-profile' %}">Profile</a>
+        {% endif %}
       </li>
-
         </div>
       </li>      
 {% else %}
-      <li class="nav-item {% block registeractive %} {% endblock registeractive %}">
-        <a class="nav-link" href="{% url 'users:student_register' %}">Register</a>
-      </li>
+<ul class="navbar-nav mr-2">
+  <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Signup</a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'users:teacher_register' %}">Teacher</a>
+            <a class="dropdown-item" href="{% url 'users:student_register' %}">Student</a>
+  </div>
+  
       <li class="nav-item {% block loginactive %} {% endblock loginactive %}">
         <a class="nav-link" href="{% url 'users:login' %}">Login</a>
       </li>
@@ -50,6 +68,14 @@
 </nav>
 <br>
 </body>
+{% if messages %}                                             <!--code to print out the flash messages-->
+{% for message in messages %}
+     <div class="alert alert-{{ message.tags }}">
+       <br><br>
+          {{ message }}
+     </div>
+{% endfor %}
+{% endif %}
 {% block content %}{% endblock content%}
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

@@ -10,11 +10,12 @@ from datetime import datetime
 from users.decorators import *
 from .forms import *
 from .models import *
+from discuss.models import *
 from quiz.models import * 
 
 def index_view(request):
-    return render(request, 'users/home.html')
-    #return HttpResponse('<h1>This is home page</h1>')
+    return render(request, 'discuss/forum.html', context={'posts' : Post.objects.all()})
+    #return render(request, 'users/home1.html')
 
 class stud_register(CreateView):
     model = User
@@ -85,3 +86,25 @@ def teacher_profile(request):
         "quizzes" : list(quizzes),
     }
     return render(request, 'users/teacher-profile.html', context)
+
+@login_required
+@teacher_required
+def quiz_responses(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    response_qs = ResponseSheet.objects.filter(quiz=quiz)
+    context = {
+        "quiz" : quiz,
+        "responses" : list(response_qs),
+    }
+    return render(request, 'users/quiz_responses.html', context)
+
+@login_required
+def view_response_sheet(request, resp_id):
+    response_sheet = ResponseSheet.objects.get(id = resp_id)
+    user = response_sheet.student
+    responses = response_sheet.responses.all()
+    context = {
+        "student" : user,
+        "responses" : responses,
+    }
+    return render(request, 'users/view_response_sheet.html', context)

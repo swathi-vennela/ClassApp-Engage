@@ -36,12 +36,15 @@
         {% for response_sheet in response_sheets %}
         <div class="col-md-4">
           <div class="card" style="width: 21rem;">
-            <div class="card-body">
+            <div class="card-body" >
               <h5 class="card-title" style="text-align: center;">{{response_sheet.quiz.name}}</h5>
               <br>
               <p class="card-text">Total score = {{response_sheet.score}}</p>
               <p class="card-text">Correct answers = {{response_sheet.correct}}</p>
               <p class="card-text">Wrong answers = {{response_sheet.wrong}}</p>
+              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-1 pb-3">
+                <a class="btn btn-primary btn-lg" data-toggle="modal" href="{{response_sheet.get_response_sheet_url}}">Response Sheet</a>                 
+              </div>
               
               <br>
               <!-- <button data-bs-target="#exampleModal" data-bs-toggle="modal" data-time="{{i.time}}"
