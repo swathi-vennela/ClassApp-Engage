@@ -17,6 +17,22 @@ The other modules include <br>
 ### On the Student's end
 A student can view all the quizzes hosted by his teachers on the Quiz home page, and attempt them. 
 
-![Quiz Home](https://drive.google.com/file/d/1aBDf-Q-D7gNCiZ0S-Fof-5E4szlh-HDC/view?usp=sharing)
+![Alt text](/images/uf.png?raw=true "Optional Title")
+![Alt text](/images/attempt-quiz.png?raw=true "Optional Title")
+
+Once the student marks the answer from the options for each question and clicks on submit, his responses will be auto-evaluated, and the results will be shown.
+#### NOTE
+1. Auto-evaluation works on the marking scheme of awarding 10 marks for a correct response, and no marks for an incorrect response
+2. Each question is compulsory to be attempted
+
+![Alt text](/images/result.png?raw=true "Optional Title")
+
+The response sheet of this submission will show up on this student's dashboard as well as the teacher's dashboard (the teacher who has hosted this quiz).
+<b>Once a student attempts a quiz, he will not be able to take the same quiz again, an alert message saying that he has already attempted the quiz pops up.</b>
+
+
+
+
+
 
 
