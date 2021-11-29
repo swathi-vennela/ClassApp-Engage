@@ -67,7 +67,5 @@ Teachers can only view the posts and the replies, but add any post or reply. Thi
 2. SQLite database
 3. HTML, CSS, Javascript for frontend templates
 
-
-
-
+### [Video demo](https://drive.google.com/file/d/14YxztlSIMWiGe0Qb1GpVf0a53mqx0fTT/view?usp=sharing)
 
