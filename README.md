@@ -1,7 +1,25 @@
 # ClassApp-Engage
 #### A platform where the students and teachers can stay engaged with the regular academic activities and discover a new way of learning during the pandemic.
 This application supports two types of users : Teacher and the Student. <br>
-A new user can sign-up as a teacher or as a student based on his role. 
+A new user can sign-up as a teacher or as a student based on his role.
+
+## Run the project
+
+1. Clone the repository
+```
+git clone https://github.com/swathi-vennela/ClassApp-Engage.git 
+```
+2. Go into the classApp directory and install the requirements.txt
+```
+cd classApp
+pip install -r requirements.txt
+```
+4. Run the server
+```
+python manage.py runserver
+```
+On the browser http://127.0.0.1:8000/ will open the application
+
 ## Modules
 The main modules in this application are: <br>
 1. Quiz module with auto-evaluation
@@ -44,6 +62,10 @@ Students can create a post and reply on any post. Post content can be any "text 
 ### On Teacher's end
 Teachers can only view the posts and the replies, but add any post or reply. This discussion forum is meant for student's discussions only.
 
+## Tech stack 
+1. Django web framework for backend
+2. SQLite database
+3. HTML, CSS, Javascript for frontend templates
 
 
 
